@@ -80,6 +80,7 @@ The phase is calculated from the current block timestamp.
 - Remix VM
 - JavaScript scripts enabled in Remix
 - No external frontend is required
+- ethers.js: `5.8.0`
 
 The JavaScript examples use ethers.js v5 syntax.
 
