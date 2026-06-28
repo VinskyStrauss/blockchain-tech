@@ -64,19 +64,19 @@ The Remix tab must remain open while the script is waiting.
 
 The contract exposes a `phase()` function that returns one of the following values:
 
-| Phase | Meaning |
-|---|---|
-| `COMMIT` | Bidders can submit signed commitments. |
-| `REVEAL` | Bidders can reveal their bids and deposit ETH. |
+| Phase               | Meaning                                                     |
+| ------------------- | ----------------------------------------------------------- |
+| `COMMIT`            | Bidders can submit signed commitments.                      |
+| `REVEAL`            | Bidders can reveal their bids and deposit ETH.              |
 | `READY_TO_FINALIZE` | The reveal period has ended and `finalize()` can be called. |
-| `FINALIZED` | The auction has been finalized. |
+| `FINALIZED`         | The auction has been finalized.                             |
 
 The phase is calculated from the current block timestamp.
 
 ## Requirements
 
 - Remix IDE
-- Solidity compiler `0.8.24` or newer
+- Solidity compiler: 0.8.24
 - Remix VM
 - JavaScript scripts enabled in Remix
 - No external frontend is required
@@ -115,17 +115,14 @@ Do not reset or change the Remix VM after deployment. Doing so will remove or re
 Update the configuration values near the beginning of the script:
 
 ```javascript
-const contractAddress =
-    "PASTE_DEPLOYED_CONTRACT_ADDRESS";
+const contractAddress = "PASTE_DEPLOYED_CONTRACT_ADDRESS";
 
-const bidderAddress =
-    "PASTE_REMIX_VM_BIDDER_ADDRESS";
+const bidderAddress = "PASTE_REMIX_VM_BIDDER_ADDRESS";
 
-const bidAmount =
-    ethers.utils.parseEther("1");
+const bidAmount = ethers.utils.parseEther("1");
 
 const salt =
-    "0x8f3a6d9c41e7b2f05c8d13a964be27f1d5c7048a9e6b32f0c147da85b39e62ac";
+  "0x8f3a6d9c41e7b2f05c8d13a964be27f1d5c7048a9e6b32f0c147da85b39e62ac";
 ```
 
 The example bid is `1 ETH`.
@@ -185,17 +182,14 @@ The reveal must use:
 Configure `BidReveal.js` with the same values used in `BidPlacement.js`:
 
 ```javascript
-const contractAddress =
-    "PASTE_DEPLOYED_CONTRACT_ADDRESS";
+const contractAddress = "PASTE_DEPLOYED_CONTRACT_ADDRESS";
 
-const bidderAddress =
-    "PASTE_REMIX_VM_BIDDER_ADDRESS";
+const bidderAddress = "PASTE_REMIX_VM_BIDDER_ADDRESS";
 
-const bidAmount =
-    ethers.utils.parseEther("1");
+const bidAmount = ethers.utils.parseEther("1");
 
 const salt =
-    "0x8f3a6d9c41e7b2f05c8d13a964be27f1d5c7048a9e6b32f0c147da85b39e62ac";
+  "0x8f3a6d9c41e7b2f05c8d13a964be27f1d5c7048a9e6b32f0c147da85b39e62ac";
 ```
 
 Then:
@@ -208,13 +202,9 @@ Then:
 When the contract enters the reveal phase, the script calls:
 
 ```javascript
-contract.revealBid(
-    bidAmount,
-    salt,
-    {
-        value: bidAmount
-    }
-);
+contract.revealBid(bidAmount, salt, {
+  value: bidAmount,
+});
 ```
 
 The ETH value sent with the transaction must equal the revealed bid amount.
@@ -293,18 +283,18 @@ credits(address)
 
 ## Useful Contract Functions
 
-| Function | Purpose |
-|---|---|
-| `phase()` | Returns the current auction phase. |
-| `commitEnd()` | Returns the commitment deadline as a Unix timestamp. |
-| `revealEnd()` | Returns the reveal deadline as a Unix timestamp. |
-| `makeCommitment()` | Calculates the commitment for a bidder, amount, and salt. |
-| `nonces(address)` | Returns the bidder's next signature nonce. |
-| `commitments(address)` | Returns the stored commitment, nonce, and reveal status. |
-| `highestBidder()` | Returns the current highest bidder. |
-| `highestBid()` | Returns the current highest bid in wei. |
-| `credits(address)` | Returns the amount an address can withdraw. |
-| `finalized()` | Shows whether the auction has been finalized. |
+| Function               | Purpose                                                   |
+| ---------------------- | --------------------------------------------------------- |
+| `phase()`              | Returns the current auction phase.                        |
+| `commitEnd()`          | Returns the commitment deadline as a Unix timestamp.      |
+| `revealEnd()`          | Returns the reveal deadline as a Unix timestamp.          |
+| `makeCommitment()`     | Calculates the commitment for a bidder, amount, and salt. |
+| `nonces(address)`      | Returns the bidder's next signature nonce.                |
+| `commitments(address)` | Returns the stored commitment, nonce, and reveal status.  |
+| `highestBidder()`      | Returns the current highest bidder.                       |
+| `highestBid()`         | Returns the current highest bid in wei.                   |
+| `credits(address)`     | Returns the amount an address can withdraw.               |
+| `finalized()`          | Shows whether the auction has been finalized.             |
 
 ## Complete Test Flow
 
